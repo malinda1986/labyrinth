@@ -1,0 +1,484 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "API Doc",
+    "version": "0.0.0",
+    "title": "Labyrinth API Documentation",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "basePath": "/api/v1/labyrinth",
+  "tags": [
+    {
+      "name": "Authentication & Verification",
+      "description": "User authentication and verification",
+      "externalDocs": {
+        "description": "Related docs",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "user",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "labyrinth",
+      "description": "Operations about labyrinth",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/signin/local": {
+      "post": {
+        "tags": [
+          "Authentication & Verification"
+        ],
+        "summary": "Local signin",
+        "description": "",
+        "operationId": "Signin",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "Signin",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A User object",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "token": {
+                  "type": "string",
+                  "description": "this token use to verification"
+                },
+                "user": {
+                  "type": "object",
+                  "description": "this token use to verification"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "errors"
+          },
+          "403": {
+            "description": "Duplication key errors"
+          }
+        }
+      }
+    },
+    "/user": {
+      "post": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Create user",
+        "description": "Create user",
+        "operationId": "Createuser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "user",
+            "description": "Create",
+            "schema": {
+              "type": "object",
+              "required": [
+                "name",
+                "password"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created user",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Request"
+          },
+          "404": {
+            "description": "User not found"
+          }
+        }
+      }
+    },
+    "/labyrinth": {
+      "post": {
+        "tags": [
+          "labyrinth"
+        ],
+        "summary": "Create labyrinth",
+        "description": "Create labyrinth",
+        "operationId": "Createlabyrinth",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "labyrinth",
+            "description": "Create",
+            "schema": {
+              "type": "object",
+              "required": [
+                "owner"
+              ],
+              "properties": {
+                "owner": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created labyrinth",
+            "schema": {
+              "$ref": "#/definitions/Labyrinth"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Request"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "labyrinth"
+        ],
+        "summary": "Get all labyrinth ids",
+        "description": "",
+        "operationId": "getlabyrinth",
+        "produces": [
+          "application/json"
+        ],
+
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Labyrinth"
+            }
+          }
+        }
+      }
+    },
+    "/labyrinth/{id}": {
+      "get": {
+        "tags": [
+          "labyrinth"
+        ],
+        "summary": "Get labyrinth by id",
+        "description": "Get labyrinth by id",
+        "operationId": "Get labyrinth by id",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "labyrinth that needs to be fetched",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully created labyrinth",
+            "schema": {
+              "$ref": "#/definitions/Labyrinth"
+            }
+          },
+          "401": {
+            "description": "Unauthorized Request"
+          }
+        }
+      }
+     
+    },
+    "/labyrinth/{id}/playfield/{x}/{y}/{type}": {
+      "patch": {
+        "tags": [
+          "labyrinth"
+        ],
+        "summary": "Set playfield type",
+        "description": "",
+        "operationId": "Set playfield type",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "labyrinth that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "labyrinth x coordination",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "labyrinth x coordination",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "labyrinth block type",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Labyrinth"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "Labyrinth not found"
+          }
+        }
+      }
+    },
+    "/labyrinth/{id}/{status}/{x}/{y}": {
+      "patch": {
+        "tags": [
+          "labyrinth"
+        ],
+        "summary": "Set start/end type",
+        "description": "",
+        "operationId": "Set start/end type",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "labyrinth that needs to be updated",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "labyrinth x coordination",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x",
+            "in": "path",
+            "description": "labyrinth x coordination",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "path",
+            "description": "labyrinth block start/end",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Labyrinth"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "Labyrinth not found"
+          }
+        }
+      }
+    },
+    "/labyrinth/{id}/solution": {
+      "get": {
+        "tags": [
+          "labyrinth"
+        ],
+        "summary": "Solution",
+        "description": "",
+        "operationId": "Solution",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "labyrinth that needs to be updated",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Labyrinth"
+            }
+          },
+          "400": {
+            "description": "Invalid id supplied"
+          },
+          "404": {
+            "description": "Labyrinth not found"
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "JWT":{
+      "description": "",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "JWT": [
+      ]
+    }
+  ],
+  "definitions": {
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "Labyrinth": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "owner": {
+          "type": "string"
+        },
+        "playfield": {
+          "type": "array",
+          "x": {
+            "type": "integer"
+          },
+          "y": {
+            "type": "integer"
+          },
+          "types": {
+            "type": "string"
+          }
+        },
+        "start": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            }
+          }
+        },
+        "end": {
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "integer"
+            },
+            "y": {
+              "type": "integer"
+            }
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}

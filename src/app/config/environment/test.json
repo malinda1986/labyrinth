@@ -1,0 +1,9 @@
+{
+    "hostname": "",
+    "mongo": {
+        "host": "localhost:27017",
+        "db": "local"
+    },
+    "port": "3000",
+    "log_level": "error"
+}

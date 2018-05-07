@@ -1,0 +1,10 @@
+{
+    "hostname": "",
+    "mongo": {
+        "host": "mongodb://mal:mal@ds115350.mlab.com:15350/labyrinth_mal",
+        "db": "labyrinth",
+        "debug": true
+    },
+    "port": "8080",
+    "log_level": "error"
+}

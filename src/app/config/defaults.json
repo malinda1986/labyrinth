@@ -1,0 +1,18 @@
+{
+    "hostname": "malinda.dev",
+    "mongo_url": "mongodb://127.0.0.1/labyrinth",
+    "mongo" : {
+        "host": "127.0.0.1",
+        "db": "labyrinth"
+    },
+    "api": {
+        "version" : 1,
+        "app_path": "/api/v1/labyrinth"
+    },
+    "jwt":{
+      "secret": "Nuf#jf97^f%AoL05!"
+    },
+    "ip": "localhost",
+    "port": "8350",
+    "log_level": "error"
+}
